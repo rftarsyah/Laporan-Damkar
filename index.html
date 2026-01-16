@@ -1,12 +1,80 @@
 <!DOCTYPE html>
 <html lang="id">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 12px;
+  }
+
+  h2, h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  input, select, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    min-height: 90px;
+  }
+
+  button {
+    background: #e53935;
+    color: white;
+    font-weight: bold;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:active {
+    background: #c62828;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 16px 0;
+  }
+
+  #output {
+    background: #fff;
+    font-family: monospace;
+  }
+
+  #petugas input {
+    width: auto;
+    margin-right: 6px;
+  }
+</style>
+
 <head>
   <meta charset="UTF-8">
-  <title>Laporan Damkar</title>
+  <title>Laporan Damkar Sektor X Pesanggrahan</title>
 </head>
 <body>
 
-<h2>Form Laporan Penyelamatan / Kebakaran</h2>
+<h2>Form Laporan</h2>
+<h2>Penyelamatan/Kebakaran</h2>
 
 <label>Data</label><br>
 <select id="dataJenis">
@@ -100,10 +168,10 @@ Jumlah Unit: <input type="text" id="unit" placeholder="contoh: 1 mobil / 2 motor
 <hr>
 
 <h3>Kronologis</h3>
-<textarea id="kronologis" rows="5"></textarea><br><br>
+<textarea id="kronologis" rows="5" cols="70"></textarea><br><br>
 
 <h3>Tindakan</h3>
-<textarea id="tindakan" rows="5"></textarea><br><br>
+<textarea id="tindakan" rows="5" cols="70"></textarea><br><br>
 
 <hr>
 

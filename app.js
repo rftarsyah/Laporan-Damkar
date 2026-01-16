@@ -237,6 +237,9 @@ Terima : ${terima.value.replace(":", ".")} WIB
 Meluncur : ${meluncur.value.replace(":", ".")} WIB
 Selesai : ${selesai.value.replace(":", ".")} WIB
 
+*Pengerahan Personil*
+${jumlahPersonil.value} Personil dan ${unit.value}
+
 *Kronologis*
 ${kronologis.value}
 
@@ -278,3 +281,4 @@ document.getElementById("alamat").addEventListener("input", () => {
   kronologis.value = tpl.kronologis;
   tindakan.value = tpl.tindakan;
 });
+

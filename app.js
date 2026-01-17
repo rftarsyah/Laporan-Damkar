@@ -1,19 +1,80 @@
 const ROTASI_KOMPI = ["Kompi A", "Kompi B", "Kompi C"];
 
 const dataPetugas = {
-  "Kompi A": ["Arsudin","Mulyadi","Wiwit","Yudhi"],
-  "Kompi B": ["Fulan","Fulin"],
-  "Kompi C": ["Fulon"]
+  "Kompi A": [
+    "Kusumahadi/ASN",
+    "Mulyadi Saputra/ASN",
+    "Nuriyanto, SE/ASN",
+    "Arsuddin, S.Ip./ASN",
+    "Sigit Supriyanto/ASN",
+    "Yudhi Rahmat/ASN",
+    "Wiwit Sumarniyanto/ASN",
+    "Hanan Seviola Silva/CPNS",
+    "Kevin Dio Ananda/CPNS",
+    "Riffat Atharsyan/CPNS",
+    "Bambang Kusmanto/PJLP",
+    "Ibnu Susetyodo/PJLP",
+    "Ismu Saputra/PJLP",
+    "A. Ardiansyah/PJLP",
+    "Ahmad Robbi/PJLP",
+    "Yajid Muhadi/PJLP",
+    "Billy Yudistira Nugraha/PJLP",
+    "Muhammad Abduh/PJLP",
+    "M Taufik/PJLP"
+  ],
+
+  "Kompi B": [
+    "Didi Rosadi, S.IP./ASN",
+    "Eko Septiawan, S.H./ASN",
+    "Doni Saputro, S.E./ASN",
+    "Andriansyah, S.M./ASN",
+    "Aziz Nurdin, S.H./ASN",
+    "Arip Rahman Hakim/ASN",
+    "Wahyu Nugroho/ASN",
+    "Adam Suryana/CPNS",
+    "Agge Nikolaus/CPNS",
+    "Braja Mesti/CPNS",
+    "Adnan Setiawan/PJLP",
+    "Amri Ar Rachman/PJLP",
+    "Muhammad Fadli/PJLP",
+    "Mochamad Rastu Rizky/PJLP",
+    "Sigit Riyanto/PJLP",
+    "Chaerul Bahri/PJLP",
+    "Ivan Fadillah/PJLP",
+    "Mohamad Sholahudin/PJLP"
+  ],
+
+  "Kompi C": [
+    "Eko Prasetyo, S.H./ASN",
+    "Feri Hamdanika, SH/ASN",
+    "Muhamad Dikky Purnama/ASN",
+    "Ade Fadillah/ASN",
+    "Bayu Hario Santoso, S.Kom./ASN",
+    "Endang Hidayat/ASN",
+    "Agus Suliyanto, SE/ASN",
+    "Geza Ravi Rizky Lutviagusta/CPNS",
+    "Sultan Mahesa/CPNS",
+    "Andi Kurniawan/PJLP",
+    "Burhanudin/PJLP",
+    "Endang Nurcahya/PJLP",
+    "Frido Amirulloh/PJLP",
+    "Sahrul Gunawan/PJLP",
+    "Sukron Khairil F./PJLP",
+    "Andri Juliansyah/PJLP",
+    "M. Tegar Maulana G./PJLP",
+    "Adhiya Rizqi Amarullah/PJLP",
+    "Rohman/PJLP"
+  ]
 };
 
 const dataKoordinator = {
   "Kompi A": `Bpk. Mulyadi, SH
 Bpk. Iskandar, S.T
 Satgas/Katon Grup A Sektor X Pesanggrahan`,
-  "Kompi B": `Bpk. Fulan BA
-Bpk. Fulin BB
+  "Kompi B": `Bpk. Kaspul Arman, S.E.  
 Satgas/Katon Grup B Sektor X Pesanggrahan`,
-  "Kompi C": `Bpk. Fulon C
+  "Kompi C": `Bpk. Nuriyanto, S.E.
+  Rudiawan, S.H.       
 Satgas/Katon Grup C Sektor X Pesanggrahan`
 };
 
@@ -106,3 +167,4 @@ function copyLaporan(){
   document.execCommand("copy");
   alert("Laporan berhasil disalin ✅");
 }
+

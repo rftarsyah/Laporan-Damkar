@@ -468,9 +468,20 @@ function pilihMenu(menu) {
   }
 }
 
-const jadwalPerwira = [
-   "Poengky Hermingto, S.E.",   // hari ini
-  "Sjukri, S.Sos., M.Si.",    // BESOK
+/* =========================
+   ROTASI OTOMATIS 07.30
+========================= */
+
+// 1️⃣ BASE ROTASI (WAJIB PALING ATAS)
+const ROTASI_START = new Date(2026, 0, 19, 7, 30, 0);
+
+// 2️⃣ URUTAN KOMPI
+const urutanKompi = ["Kompi A", "Kompi B", "Kompi C"];
+
+// 3️⃣ URUTAN PERWIRA
+const urutanPerwira = [
+  "Poengky Hermingto, S.E.",
+  "Sjukri, S.Sos., M.Si.",
   "Kusnanto, S.H.",
   "Ngatiyo, S.E.",
   "Sarono, S.E.",
@@ -482,8 +493,13 @@ const jadwalPerwira = [
   "Mohammad Slamet, S.Ip."
 ];
 
-const kompiList = ["Kompi A", "Kompi B", "Kompi C"];
-
+// 4️⃣ BARU FUNGSI
+function getRotasiIndex(tgl) {
+  const [y, m, d] = tgl.split("-").map(Number);
+  const selected = new Date(y, m - 1, d, 7, 30, 0);
+  const diffDay = Math.floor((selected - ROTASI_START) / (1000 * 60 * 60 * 24));
+  return diffDay >= 0 ? diffDay : 0;
+}
 
 
 function generateLaporanEdukasi() {
@@ -656,6 +672,7 @@ Satgas/Katon Grup C Sektor X Pesanggrahan`;
   document.getElementById("personilEdukasi").value =
     "Anggota Piket Grup " + kompi.split(" ")[1];
 });
+
 
 
 

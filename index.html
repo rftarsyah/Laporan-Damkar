@@ -1,114 +1,155 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laporan Evakuasi Damkar</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 12px;
-}
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 12px;
+  }
 
-h2 {
-  text-align: center;
-}
+  h2, h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
 
-label {
-  font-weight: bold;
-  margin-top: 12px;
-  display: block;
-}
+  label {
+    font-weight: 600;
+    font-size: 14px;
+  }
 
-input, select, textarea, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
+  input, select, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
 
-textarea {
-  min-height: 80px;
-}
+  textarea {
+    min-height: 90px;
+  }
 
-button {
-  background: #d32f2f;
-  color: white;
-  border: none;
-  font-weight: bold;
-}
+  button {
+    background: #e53935;
+    color: white;
+    font-weight: bold;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
 
-button.copy {
-  background: #1976d2;
-}
+  button:active {
+    background: #c62828;
+  }
 
-#petugas {
-  background: #fff;
-  padding: 10px;
-  border-radius: 6px;
-}
+  hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 16px 0;
+  }
+
+  #output {
+    background: #fff;
+    font-family: monospace;
+  }
+
+  #petugas input {
+    width: auto;
+    margin-right: 6px;
+  }
 </style>
-</head>
 
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan Damkar Sektor X Pesanggrahan</title>
+</head>
 <body>
 
-<h2>Laporan Evakuasi</h2>
+<h2>Form Laporan Penyelamatan</h2>
 
-<label>Kompi</label>
+<label>Tanggal</label><br>
+<input type="date" id="tanggal"><br><br>
+
+<hr>
+
+<label>Jenis Evakuasi</label><br>
+<input id="evakuasiInput">
+
+<h3>Kompi</h3>
 <select id="kompi">
+  <option value="">-- Pilih Kompi --</option>
   <option>Kompi A</option>
   <option>Kompi B</option>
   <option>Kompi C</option>
 </select>
 
-<label>Evakuasi</label>
-<input id="evakuasiInput">
+<hr>
 
-<label>Tanggal</label>
-<input type="date" id="tanggal">
+<label>Nama Pelapor</label><br>
+<input type="text" id="pelapor"><br><br>
 
-<label>Alamat</label>
-<textarea id="alamat"></textarea>
+<label>No HP</label><br>
+<input type="text" id="hp"><br><br>
 
-<label>Perwira Piket</label>
+<label>Alamat Pelapor</label><br>
+<textarea id="alamat"></textarea><br><br>
+
+<hr>
+
+<h3>Perwira Piket 401</h3>
 <select id="perwira">
-  <option data-jabatan="Danru">Perwira A</option>
-  <option data-jabatan="Danru">Perwira B</option>
-  <option data-jabatan="Danru">Perwira C</option>
+  <option value="">-- Pilih Perwira --</option> 
+  <option value="Sjukri, S.Sos., M.Si." data-jabatan="Kasie Ops Dalkarmat (4-4)">Sjukri, S.Sos., M.Si.</option>
+  <option value="Kusnanto, S.H." data-jabatan="Kasie Kecamatan Tebet (4-11 Pati)">Kusnanto, S.H.</option>
+  <option value="Ngatiyo, S.E." data-jabatan="Kasie Kecamatan Setiabudi (4-12 Pati)">Ngatiyo, S.E.</option>
+  <option value="Sarono, S.E." data-jabatan="Kasie Kecamatan Mampang Prapatan (4-13 Pati)">Sarono, S.E.</option>
+  <option value="H. Wirawan Aries Wibowo, S.E." data-jabatan="Kasie Kecamatan Pasar Minggu (4-14 Pati)">H. Wirawan Aries Wibowo, S.E.</option>
+  <option value="Paryo, S.T., M.M." data-jabatan="Kasie Kecamatan Kebayoran Lama (4-15 Pati)">Paryo, S.T., M.M.</option>
+  <option value="Anwar Kamsari, S.T." data-jabatan="Kasie Kecamatan Cilandak (4-16 Pati)">Anwar Kamsari, S.T.</option>
+  <option value="Ruwanto, S.H." data-jabatan="Kasie Kecamatan Kebayoran Baru (4-17 Pati)">Ruwanto, S.H.</option>
+  <option value="H. Imbang Satriana, S.Pd., M.M." data-jabatan="Kasie Kecamatan Pancoran (4-18 Pati)">H. Imbang Satriana, S.Pd., M.M.</option>
+  <option value="Mohammad Slamet, S.Ip." data-jabatan="Kasie Kecamatan Jagakarsa (4-19 Pati)">Mohammad Slamet, S.Ip.</option>
+  <option value="Poengky Hermingto, S.E." data-jabatan="Kasie Kecamatan Pesanggrahan (4-20 Pati)">Poengky Hermingto, S.E.</option>
 </select>
 
-<label>Terima</label>
-<input type="time" id="terima">
-<label>Meluncur</label>
-<input type="time" id="meluncur">
-<label>Selesai</label>
-<input type="time" id="selesai">
+<hr>
 
-<label>Jumlah Personil</label>
-<input id="jumlahPersonil">
+<h3>Pelaksanaan</h3>
+Terima laporan: <input type="time" id="terima"> WIB<br>
+Meluncur: <input type="time" id="meluncur"> WIB<br>
+Selesai: <input type="time" id="selesai"> WIB<br><br>
 
-<label>Unit</label>
-<input id="unit" placeholder="Contoh: 1 Unit Light Rescue">
+<hr>
 
-<label>Kronologis</label>
-<textarea id="kronologis"></textarea>
+<h3>Pengerahan Personil</h3>
+Jumlah Personil: <input type="number" id="jumlahPersonil"><br>
+Jumlah Unit: <input type="text" id="unit" placeholder="contoh: 1 mobil / 2 motor"><br>
 
-<label>Tindakan</label>
-<textarea id="tindakan"></textarea>
+<hr>
 
-<label>Petugas</label>
+<h3>Kronologis</h3>
+<textarea id="kronologis" rows="5" cols="70"></textarea><br><br>
+
+<h3>Tindakan</h3>
+<textarea id="tindakan" rows="5" cols="70"></textarea><br><br>
+
+<hr>
+
 <div id="petugas"></div>
 
-<button onclick="generateLaporan()">Generate</button>
-<button class="copy" onclick="copyLaporan()">📋 Copy</button>
+<br>
+<button onclick="generateLaporan()">Generate Laporan</button>
 
-<label>Output</label>
-<textarea id="output"></textarea>
+<h3>Hasil Laporan</h3>
+<textarea id="output" rows="30" cols="90" readonly></textarea>
 
 <script src="app.js"></script>
 </body>

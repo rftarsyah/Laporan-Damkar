@@ -1,5 +1,35 @@
-const ROTASI_KOMPI = ["Kompi A", "Kompi B", "Kompi C"];
+/* =========================
+   AMBIL ELEMENT FORM
+========================= */
+const dataJenis = document.getElementById("dataJenis");
+const evakuasiInput = document.getElementById("evakuasiInput");
+const grupJaga = document.getElementById("grupJaga");
+const tanggal = document.getElementById("tanggal");
 
+const pelapor = document.getElementById("pelapor");
+const hp = document.getElementById("hp");
+const alamat = document.getElementById("alamat");
+
+const perwira = document.getElementById("perwira");
+
+const terima = document.getElementById("terima");
+const meluncur = document.getElementById("meluncur");
+const selesai = document.getElementById("selesai");
+
+const jumlahPersonil = document.getElementById("jumlahPersonil");
+const unit = document.getElementById("unit");
+
+const jenisUtama = document.getElementById("jenisUtama");
+const jenisDetail = document.getElementById("jenisDetail");
+
+const kronologis = document.getElementById("kronologis");
+const tindakan = document.getElementById("tindakan");
+
+const output = document.getElementById("output");
+
+/* =========================
+   DATA PETUGAS
+========================= */
 const dataPetugas = {
   "Kompi A": [
     "Kusumahadi/ASN",
@@ -67,59 +97,165 @@ const dataPetugas = {
   ]
 };
 
-const dataKoordinator = {
-  "Kompi A": `Bpk. Mulyadi, SH
-Bpk. Iskandar, S.T
-Satgas/Katon Grup A Sektor X Pesanggrahan`,
-  "Kompi B": `Bpk. Kaspul Arman, S.E.  
-Satgas/Katon Grup B Sektor X Pesanggrahan`,
-  "Kompi C": `Bpk. Nuriyanto, S.E.
-  Rudiawan, S.H.       
-Satgas/Katon Grup C Sektor X Pesanggrahan`
-};
+document.getElementById("kompi").addEventListener("change", function () {
+  const container = document.getElementById("petugas");
+  container.innerHTML = "";
+  const list = dataPetugas[this.value];
+  if (!list) return;
 
-function getKompiOtomatis() {
-  const now = new Date();
-  let hari = now.getDay();
-  if (now.getHours() < 7 || (now.getHours() === 7 && now.getMinutes() < 30)) {
-    hari = hari - 1 < 0 ? 6 : hari - 1;
-  }
-  return ROTASI_KOMPI[hari % 3];
-}
-
-window.onload = () => {
-  kompi.value = getKompiOtomatis();
-  loadPetugas();
-};
-
-kompi.addEventListener("change", loadPetugas);
-
-function loadPetugas() {
-  petugas.innerHTML = "";
-  (dataPetugas[kompi.value] || []).forEach((p,i)=>{
-    petugas.innerHTML += `<input type="checkbox" class="p" value="${p}"> ${p}<br>`;
+  list.forEach(nama => {
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "petugas";
+    cb.value = nama;
+    container.appendChild(cb);
+    container.append(" " + nama);
+    container.appendChild(document.createElement("br"));
   });
+});
+
+/* =========================
+   UTIL
+========================= */
+function getHari(tgl) {
+  const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  return hari[new Date(tgl).getDay()];
 }
 
-function getHari(t){
-  return ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][new Date(t).getDay()];
-}
-
-function emojiEvakuasi(t){
-  if(!t) return "";
-  if(t.includes("ular")) return " 🐍";
-  if(t.includes("kucing")) return " 🐱";
-  if(t.includes("banjir")) return " 🚣";
-  if(t.includes("api")) return " 🔥";
+/* =========================
+   EMOJI
+========================= */
+function emojiEvakuasi(text) {
+  const t = text.toLowerCase();
+  const rules = [
+    { keys: ["ular"], emoji: "🐍" },
+    { keys: ["kucing"], emoji: "🐱" },
+    { keys: ["lebah","tawon"], emoji: "🐝" },
+    { keys: ["biawak"], emoji: "🦎" },
+    { keys: ["banjir"], emoji: "🚣" },
+    { keys: ["kunci mobil"], emoji: "🚗" },
+    { keys: ["kunci"], emoji: "🔑" },
+    { keys: ["hp"], emoji: "📱" },
+    { keys: ["cincin"], emoji: "💍" },
+    { keys: ["pohon"], emoji: "🌳" },
+    { keys: ["api","kebakaran"], emoji: "🔥" }
+  ];
+  for (let r of rules) {
+    if (r.keys.some(k => t.includes(k))) return " " + r.emoji;
+  }
   return " ⚙️";
 }
 
-function generateLaporan() {
-  const pj = perwira.options[perwira.selectedIndex];
-  const jabatan = pj?.dataset.jabatan || "";
+/* =========================
+   TEMPLATE OTOMATIS
+========================= */
+function getTemplateEvakuasi(jenis, alamatText) {
+  const j = jenis.toLowerCase();
 
-  const listPetugas = [...document.querySelectorAll(".p:checked")]
-    .map((p,i)=>`${i+1}. ${p.value}`).join("\n");
+  if (j.includes("ular") || j.includes("biawak")) return {
+    kronologis: `Pelapor melihat adanya hewan berbahaya di ${alamat.value} yang berpotensi membahayakan, kemudian melaporkan kejadian tersebut ke Sektor Pemadam Pesanggrahan.`,
+    tindakan: `Petugas melakukan evakuasi menggunakan grabstick hingga hewan berhasil diamankan dan evakuasi berjalan aman.`
+  };
+
+  if (j.includes("lebah") || j.includes("tawon")) return {
+    kronologis: `Pelapor melihat adanya sarang ${jenis} di ${alamat.value} yang berpotensi membahayakan warga sekitar.`,
+    tindakan: `Petugas melakukan evakuasi sarang ${jenis} menggunakan plastik dan peralatan pendukung hingga aman.`
+  };
+
+  if (j.includes("kucing")) return {
+    kronologis: `Pelapor melaporkan adanya kucing yang terjebak di pohon atau genteng rumah di ${alamat.value}.`,
+    tindakan: `Petugas mengevakuasi kucing menggunakan tangga lipat dan jaring pengaman hingga berhasil dievakuasi.`
+  };
+
+  if (j.includes("cincin")) return {
+    kronologis: `Pelapor datang langsung ke Kantor Damkar Sektor Pesanggrahan untuk permintaan evakuasi lepas cincin akibat jari mengalami pembengkakan.`,
+    tindakan: `Petugas memotong cincin menggunakan gerinda mini hingga cincin terbelah dua dan terlepas dengan aman.`
+  };
+
+  if (j.includes("banjir")) return {
+    kronologis: `Terjadi genangan air di ${alamat.value} akibat intensitas hujan yang tinggi sehingga mengganggu aktivitas warga.`,
+    tindakan: `Petugas melakukan penyedotan dan pengalihan air menggunakan mesin pompa portable ke saluran air terdekat.`
+  };
+
+  if (j.includes("hp") || j.includes("kunci")) return {
+    kronologis: `Pelapor melaporkan ${jenis} yang terjatuh ke area sempit seperti got atau celah bangunan di ${alamat.value}.`,
+    tindakan: `Petugas melakukan evakuasi menggunakan grabstick dan kawat elastis hingga barang berhasil diamankan.`
+  };
+
+  if (j.includes("kunci mobil")) return {
+    kronologis: `Pelapor melaporkan kunci mobil tertinggal di dalam kendaraan di ${alamat.value} sehingga kendaraan terkunci.`,
+    tindakan: `Petugas melakukan pembukaan pintu kendaraan menggunakan air wedge dan kawat variasi hingga kunci berhasil diambil.`
+  };
+
+  if (j.includes("mobil") || j.includes("motor")) return {
+    kronologis: `Kendaraan mengalami kendala operasional di ${alamat.value} sehingga membutuhkan bantuan evakuasi.`,
+    tindakan: `Petugas melakukan penanganan dan evakuasi kendaraan menggunakan peralatan pendukung hingga aman.`
+  };
+
+  if (j.includes("pohon")) return {
+    kronologis: `Warga melaporkan adanya pohon tumbang di ${alamat.value} yang mengganggu akses dan membahayakan.`,
+    tindakan: `Petugas melakukan pemotongan dan pembersihan pohon tumbang hingga situasi aman dan terkendali.`
+  };
+
+  if (j.includes("kebakaran")) return {
+    kronologis: `Terjadi kebakaran di ${alamat.value} yang dilaporkan oleh warga sekitar.`,
+    tindakan: `Petugas melakukan pemadaman menggunakan peralatan pemadam hingga api berhasil dipadamkan dan situasi aman.`
+  };
+
+  return {
+    kronologis: `Pelapor melaporkan adanya kejadian di ${alamat.value} yang membutuhkan penanganan.`,
+    tindakan: `Petugas melakukan penanganan sesuai kondisi di lapangan hingga kegiatan berjalan aman dan lancar.`
+  };
+}
+
+/* =========================
+   AUTO ISI TEMPLATE
+========================= */
+evakuasiInput.addEventListener("change", () => {
+  const tpl = getTemplateEvakuasi(evakuasiInput.value, alamat.value || "lokasi kejadian");
+  kronologis.value = tpl.kronologis;
+  tindakan.value = tpl.tindakan;
+});
+
+/* =========================
+   SATGAS
+========================= */
+function getKoordinatorByKompi(kompi) {
+  if (kompi === "Kompi A") {
+    return `Bpk. Mulyadi, S.H
+Bpk. Iskandar, S.T
+Satgas/Katon Grup A Sektor X Pesanggrahan`;
+  }
+
+  if (kompi === "Kompi B") {
+    return `Bpk. Kaspul Arman, S.E.
+Satgas/Katon Grup B Sektor X Pesanggrahan`;
+  }
+
+  if (kompi === "Kompi C") {
+    return `Bpk. Nuriyanto, S.E.
+Bpk. Rudiawan, S.H.
+Satgas/Katon Grup C Sektor X Pesanggrahan`;
+  }
+
+  return "-";
+}
+
+
+/* =========================
+   GENERATE LAPORAN 
+========================= */
+function generateLaporan() {
+  let petugas = [];
+  document.querySelectorAll(".petugas:checked").forEach((p, i) => {
+    petugas.push(`${i + 1}. ${p.value}`);
+  });
+
+  const pj = perwira.options[perwira.selectedIndex];
+  const jabatan = pj?.getAttribute("data-jabatan") || "";
+
+  const kompiDipilih = document.getElementById("kompi").value;
+  const koordinator = getKoordinatorByKompi(kompiDipilih);
 
   output.value = `
 *SUDIN PENANGGULANGAN KEBAKARAN DAN PENYELAMATAN JAKARTA SELATAN*
@@ -127,10 +263,14 @@ function generateLaporan() {
 *Evakuasi ${evakuasiInput.value}*${emojiEvakuasi(evakuasiInput.value)}
 Hari/Tgl : ${getHari(tanggal.value)}, ${tanggal.value}
 
+*Kompi Jaga : ${kompi.value}
+
+*Nama Pelapor : ${pelapor.value}
+*NO.Telp : ${hp.value}
 *Alamat*
 ${alamat.value}
 
-*Perwira Piket*
+*Perwira Piket 401*
 ${perwira.value}
 ${jabatan}
 
@@ -139,12 +279,12 @@ Bpk. Poengky Hermingto, S.E
 Kasie Sektor X Pesanggrahan
 
 *Koordinator*
-${dataKoordinator[kompi.value]}
+${koordinator}
 
 *Pelaksanaan*
-Terima : ${terima.value.replace(":","." )} WIB
-Meluncur : ${meluncur.value.replace(":","." )} WIB
-Selesai : ${selesai.value.replace(":","." )} WIB
+Terima : ${terima.value.replace(":", ".")} WIB
+Meluncur : ${meluncur.value.replace(":", ".")} WIB
+Selesai : ${selesai.value.replace(":", ".")} WIB
 
 *Pengerahan Personil*
 ${jumlahPersonil.value} Personil dan ${unit.value}
@@ -156,15 +296,139 @@ ${kronologis.value}
 ${tindakan.value}
 
 *Petugas*
-${listPetugas}
+${petugas.join("\n")}
 
-*Demikian dilaporkan*
+*Demikian dilaporkan, 86-8.1.3*
 `.trim();
 }
 
-function copyLaporan(){
-  output.select();
-  document.execCommand("copy");
-  alert("Laporan berhasil disalin ✅");
+// ===============================
+// EVENT LISTENER (PALING BAWAH)
+// ===============================
+
+// 1. saat pilih jenis evakuasi
+document.getElementById("evakuasiInput").addEventListener("change", () => {
+  const jenis = evakuasiInput.value;
+  const alamatText = alamat.value.trim() || "lokasi kejadian";
+
+  if (!jenis) return;
+
+  const tpl = getTemplateEvakuasi(jenis, alamatText);
+  kronologis.value = tpl.kronologis;
+  tindakan.value = tpl.tindakan;
+});
+
+// 2. saat alamat diketik
+document.getElementById("alamat").addEventListener("input", () => {
+  if (!evakuasiInput.value) return;
+
+  const tpl = getTemplateEvakuasi(
+    evakuasiInput.value,
+    alamat.value.trim() || "lokasi kejadian"
+  );
+
+  kronologis.value = tpl.kronologis;
+  tindakan.value = tpl.tindakan;
+});
+
+/* =========================
+   ROTASI OTOMATIS 07.30
+   (KOMPI & PERWIRA)
+========================= */
+
+// ====== KONFIGURASI DASAR ======
+const ROTASI_START = new Date(2026, 0, 1, 7, 30, 0); // 1 Jan 2026 07.30 WIB
+
+// urutan kompi
+const urutanKompi = ["Kompi A", "Kompi B", "Kompi C"];
+
+// urutan perwira (SUMBER KEBENARAN)
+const urutanPerwira = [
+  "Sarono, S.E.",
+  "H. Wirawan Aries Wibowo, S.E.",
+  "Paryo, S.T., M.M.",
+  "Anwar Kamsari, S.T.",
+  "Ruwanto, S.H.",
+  "H. Imbang Satriana, S.Pd., M.M.",
+  "Mohammad Slamet, S.Ip.",
+  "Poengky Hermingto, S.E.",
+  "Sjukri, S.Sos., M.Si.",
+  "Kusnanto, S.H.",
+  "Ngatiyo, S.E.",
+];
+
+// ====== FLAG MANUAL ======
+let kompiManual = false;
+let perwiraManual = false;
+
+// ====== HITUNG INDEX ROTASI (FIX) ======
+function getRotasiIndex(tgl) {
+  // parsing aman YYYY-MM-DD
+  const [y, m, d] = tgl.split("-").map(Number);
+
+  // hari piket dimulai jam 07.30
+  const selected = new Date(y, m - 1, d, 7, 30, 0);
+
+  const diffDay = Math.floor(
+    (selected - ROTASI_START) / (1000 * 60 * 60 * 24)
+  );
+
+  return diffDay >= 0 ? diffDay : 0;
 }
 
+// ====== SET OTOMATIS KOMPI ======
+function setKompiOtomatis() {
+  if (kompiManual) return;
+  if (!tanggal.value) return;
+
+  const idx = getRotasiIndex(tanggal.value);
+  const kompi = urutanKompi[idx % urutanKompi.length];
+
+  const kompiSelect = document.getElementById("kompi");
+  kompiSelect.value = kompi;
+  kompiSelect.dispatchEvent(new Event("change"));
+}
+
+// ====== SET OTOMATIS PERWIRA ======
+function setPerwiraOtomatis() {
+  if (perwiraManual) return;
+  if (!tanggal.value) return;
+
+  const idx = getRotasiIndex(tanggal.value);
+  const namaPerwira = urutanPerwira[idx % urutanPerwira.length];
+
+  for (let opt of perwira.options) {
+    if (opt.value === namaPerwira) {
+      perwira.value = opt.value;
+      break;
+    }
+  }
+}
+
+// ====== EVENT LISTENER ======
+
+// jika tanggal diubah → kembali otomatis
+tanggal.addEventListener("change", () => {
+  kompiManual = false;
+  perwiraManual = false;
+  setKompiOtomatis();
+  setPerwiraOtomatis();
+});
+
+// jika kompi diganti manual
+document.getElementById("kompi").addEventListener("change", () => {
+  kompiManual = true;
+});
+
+// jika perwira diganti manual
+perwira.addEventListener("change", () => {
+  perwiraManual = true;
+});
+
+// auto set saat halaman dibuka
+window.addEventListener("load", () => {
+  if (tanggal.value) {
+    setKompiOtomatis();
+    setPerwiraOtomatis();
+  }
+});

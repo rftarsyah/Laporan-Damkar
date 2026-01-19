@@ -125,6 +125,24 @@ function getHari(tgl) {
   return hari[new Date(tgl).getDay()];
 }
 
+function getShiftIndex(tanggalInput) {
+  const baseDate = new Date("2026-01-01T07:30:00");
+  const selected = new Date(tanggalInput + "T07:30:00");
+  const diffHari = Math.floor((selected - baseDate) / (1000 * 60 * 60 * 24));
+  return diffHari >= 0 ? diffHari : 0;
+}
+
+function getKompiOtomatis(tanggalInput) {
+  const idx = getShiftIndex(tanggalInput);
+  return kompiList[idx % 3];
+}
+
+function getPerwiraOtomatis(tanggalInput) {
+  const idx = getShiftIndex(tanggalInput);
+  return jadwalPerwira[idx % jadwalPerwira.length];
+}
+
+
 /* =========================
    EMOJI
 ========================= */
@@ -436,15 +454,155 @@ window.addEventListener("load", () => {
   }
 });
 
-
 function pilihMenu(menu) {
   document.getElementById("menuAwal").style.display = "none";
+  document.getElementById("formEvakuasi").style.display = "none";
+  document.getElementById("formEdukasi").style.display = "none";
 
   if (menu === "evakuasi" || menu === "kebakaran") {
     document.getElementById("formEvakuasi").style.display = "block";
-  } else {
-    alert("Form Edukasi belum dibuat");
-    document.getElementById("menuAwal").style.display = "block";
+  }
+
+  if (menu === "edukasi") {
+    document.getElementById("formEdukasi").style.display = "block";
   }
 }
 
+const jadwalPerwira = [
+  "Sjukri, S.Sos., M.Si.",
+  "Kusnanto, S.H.",
+  "Ngatiyo, S.E.",
+  "Sarono, S.E.",
+  "H. Wirawan Aries Wibowo, S.E.",
+  "Paryo, S.T., M.M.",
+  "Anwar Kamsari, S.T.",
+  "Ruwanto, S.H.",
+  "H. Imbang Satriana, S.Pd., M.M.",
+  "Mohammad Slamet, S.Ip.",
+  "Poengky Hermingto, S.E."
+];
+
+const kompiList = ["Kompi A", "Kompi B", "Kompi C"];
+
+
+
+function generateLaporanEdukasi() {
+  const tgl = document.getElementById("tanggalEdukasi").value;
+  const hari = tgl ? getHari(tgl) : "";
+
+  const laporan = `
+*SUDIN GULKARMAT KOTA ADM JAKARTA SELATAN*
+
+*KANTOR SEKTOR X PESANGGRAHAN (4.20.01)*
+        🏩 🚒🚒🚒
+*Jl. Ciledug Raya Pertukangan Selatan*
+
+*Izin Melaporkan Kegiatan Sosialisasi dan Edukasi*
+
+*Piket* :
+${document.getElementById("koordinatorEdukasi").value || "-"}
+
+*Hari/Tgl* :
+${hari}, ${tgl}
+
+*Jenis Kegiatan*
+Sosialisasi dan Edukasi untuk anak usia dini
+
+*Nama Sekolah* :
+${document.getElementById("namaSekolah").value}
+
+*Alamat* :
+${document.getElementById("alamatSekolah").value}
+
+*Jumlah Siswa/i* :
+${document.getElementById("jumlahSiswa").value}
+
+*Guru Pendamping* :
+${document.getElementById("guruPendamping").value}
+
+*Materi* :
+- Pemutaran video profil Kantor Sektor X Pesanggrahan
+- Pengenalan nama-nama peralatan dan fungsinya
+- Pengetahuan kantor/sektor/pos pelayanan di Kec. Pesanggrahan
+- Pengetahuan tugas dan fungsi petugas pemadam
+- Bermain hujan buatan menggunakan unit pompa
+
+*Tempat* :
+${document.getElementById("tempatEdukasi").value}
+
+*Pelaksanaan* :
+Jam Mulai : ${document.getElementById("jamMulaiEdukasi").value} WIB
+Jam Selesai : ${document.getElementById("jamSelesaiEdukasi").value} WIB
+
+*Perwira Piket 401* :
+${document.getElementById("perwiraEdukasi").value || "-"}
+
+*Penanggung Jawab* :
+Bpk. Poengky Hermingto, S.E
+Kasie Sektor X Pesanggrahan
+
+*Koordinator* :
+${document.getElementById("koordinatorEdukasi").value}
+
+*Personil* :
+${document.getElementById("personilEdukasi").value}
+
+*Demikian Laporan*
+*TERIMA KASIH*
+`.trim();
+
+  document.getElementById("outputEdukasi").value = laporan;
+}
+
+document.getElementById("tanggalEdukasi").addEventListener("change", function () {
+  if (!this.value) return;
+
+  const kompi = getKompiOtomatis(this.value);
+  const perwiraNama = getPerwiraOtomatis(this.value);
+
+  document.getElementById("kompiEdukasi").value = kompi;
+  const koordinatorField = document.getElementById("koordinatorEdukasi");
+
+if (kompi === "Kompi A") {
+  koordinatorField.value = `Bpk. Mulyadi, S.H
+Bpk. Iskandar, S.T
+Satgas/Katon Grup A Sektor X Pesanggrahan`;
+}
+else if (kompi === "Kompi B") {
+  koordinatorField.value = `Bpk. Kaspul Arman, S.E.
+Satgas/Katon Grup B Sektor X Pesanggrahan`;
+}
+else if (kompi === "Kompi C") {
+  koordinatorField.value = `Bpk. Nuriyanto, S.E.
+Bpk. Rudiawan, S.H.
+Satgas/Katon Grup C Sektor X Pesanggrahan`;
+}
+
+  document.getElementById("perwiraEdukasi").value = perwiraNama;
+});
+
+// ===============================
+// MENU AWAL NAVIGASI
+// ===============================
+function pilihMenu(menu) {
+  const menuAwal = document.getElementById("menuAwal");
+  const formEvakuasi = document.getElementById("formEvakuasi");
+  const formEdukasi = document.getElementById("formEdukasi");
+
+  if (!menuAwal || !formEvakuasi || !formEdukasi) {
+    console.error("Elemen menu / form tidak ditemukan");
+    return;
+  }
+
+  menuAwal.style.display = "none";
+  formEvakuasi.style.display = "none";
+  formEdukasi.style.display = "none";
+
+  if (menu === "kebakaran" || menu === "evakuasi") {
+    formEvakuasi.style.display = "block";
+  }
+
+  if (menu === "edukasi") {
+    formEdukasi.style.display = "block";
+  }
+}

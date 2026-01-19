@@ -469,17 +469,17 @@ function pilihMenu(menu) {
 }
 
 const jadwalPerwira = [
+   "Poengky Hermingto, S.E.",   // hari ini
+  "Sjukri, S.Sos., M.Si.",    // BESOK
+  "Kusnanto, S.H.",
+  "Ngatiyo, S.E.",
+  "Sarono, S.E.",
+  "H. Wirawan Aries Wibowo, S.E.",
+  "Paryo, S.T., M.M.",
   "Anwar Kamsari, S.T.",
   "Ruwanto, S.H.",
   "H. Imbang Satriana, S.Pd., M.M.",
-  "Mohammad Slamet, S.Ip.",
-  "Poengky Hermingto, S.E.",
-   "Sjukri, S.Sos., M.Si.",
-  "Kusnanto, S.H.",
-  "Ngatiyo, S.E.",
-    "Sarono, S.E.",
-  "H. Wirawan Aries Wibowo, S.E.",
-  "Paryo, S.T., M.M.",
+  "Mohammad Slamet, S.Ip."
 ];
 
 const kompiList = ["Kompi A", "Kompi B", "Kompi C"];
@@ -656,6 +656,7 @@ Satgas/Katon Grup C Sektor X Pesanggrahan`;
   document.getElementById("personilEdukasi").value =
     "Anggota Piket Grup " + kompi.split(" ")[1];
 });
+
 
 
 

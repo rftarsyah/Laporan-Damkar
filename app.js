@@ -606,3 +606,54 @@ function pilihMenu(menu) {
     formEdukasi.style.display = "block";
   }
 }
+
+/* =========================
+   AUTO ISI EDUKASI
+========================= */
+
+// isi dropdown perwira edukasi (sekali aja)
+(function isiPerwiraEdukasi() {
+  const select = document.getElementById("perwiraEdukasi");
+  if (!select) return;
+
+  jadwalPerwira.forEach(nama => {
+    const opt = document.createElement("option");
+    opt.value = nama;
+    opt.textContent = nama;
+    select.appendChild(opt);
+  });
+})();
+
+document.getElementById("tanggalEdukasi").addEventListener("change", function () {
+  if (!this.value) return;
+
+  // === KOMPI OTOMATIS ===
+  const kompi = getKompiOtomatis(this.value);
+
+  // === PERWIRA OTOMATIS ===
+  const perwiraNama = getPerwiraOtomatis(this.value);
+  document.getElementById("perwiraEdukasi").value = perwiraNama;
+
+  // === KOORDINATOR OTOMATIS ===
+  const koordinatorField = document.getElementById("koordinatorEdukasi");
+
+  if (kompi === "Kompi A") {
+    koordinatorField.value = `Bpk. Mulyadi, S.H
+Bpk. Iskandar, S.T
+Satgas/Katon Grup A Sektor X Pesanggrahan`;
+  } 
+  else if (kompi === "Kompi B") {
+    koordinatorField.value = `Bpk. Kaspul Arman, S.E.
+Satgas/Katon Grup B Sektor X Pesanggrahan`;
+  } 
+  else if (kompi === "Kompi C") {
+    koordinatorField.value = `Bpk. Nuriyanto, S.E.
+Bpk. Rudiawan, S.H.
+Satgas/Katon Grup C Sektor X Pesanggrahan`;
+  }
+
+  // === PERSONIL OTOMATIS ===
+  document.getElementById("personilEdukasi").value =
+    "Anggota Piket Grup " + kompi.split(" ")[1];
+});
+

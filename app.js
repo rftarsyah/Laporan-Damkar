@@ -436,4 +436,23 @@ window.addEventListener("load", () => {
   }
 });
 
+function pilihMenu(jenis) {
+  document.getElementById("menuAwal").style.display = "none";
+
+  if (jenis === "evakuasi") {
+    document.getElementById("formEvakuasi").style.display = "block";
+    dataJenis.value = "Penyelamatan";
+  }
+
+  if (jenis === "kebakaran") {
+    document.getElementById("formEvakuasi").style.display = "block";
+    dataJenis.value = "Kebakaran";
+    evakuasiInput.value = "Kebakaran";
+  }
+
+  if (jenis === "edukasi") {
+    alert("Form Edukasi belum dibuat");
+  }
+}
+
 

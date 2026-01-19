@@ -159,6 +159,89 @@
 
 </div>
 
+<!-- ================= FORM EDUKASI ================= -->
+<div id="formEdukasi" style="display:none;">
+  <h2>Form Laporan Edukasi</h2>
+
+<label>Tanggal Kegiatan</label>
+<input type="date" id="tanggalEdukasi">
+
+<hr>
+
+<label>Nama Sekolah</label>
+<input type="text" id="namaSekolah" placeholder="PAUD / TK / SD / MI">
+
+<label>Alamat Sekolah</label>
+<textarea id="alamatSekolah"></textarea>
+
+<label>Jumlah Siswa/i</label>
+<input type="number" id="jumlahSiswa">
+
+<label>Guru Pendamping</label>
+<input type="text" id="guruPendamping">
+
+<hr>
+
+<h3>Jenis Kegiatan</h3>
+<textarea readonly>
+Sosialisasi dan Edukasi untuk anak usia dini
+</textarea>
+
+<h3>Materi</h3>
+<textarea readonly>
+- Pemutaran video profil Kantor Sektor X Pesanggrahan
+- Pengenalan nama-nama peralatan dan fungsinya
+- Pengetahuan kantor/sektor/pos pelayanan di Kec. Pesanggrahan
+- Pengetahuan tugas dan fungsi petugas pemadam
+- Bermain hujan buatan menggunakan unit pompa
+</textarea>
+
+<hr>
+
+<h3>Tempat Kegiatan</h3>
+<textarea id="tempatEdukasi">
+Kantor Damkar Sektor X Pesanggrahan
+Jl. Ciledug Raya
+Kel. Petukangan Selatan
+Kec. Pesanggrahan
+</textarea>
+
+<hr>
+
+<h3>Pelaksanaan</h3>
+Jam Mulai:
+<input type="time" id="jamMulaiEdukasi" value="08:00">
+
+Jam Selesai:
+<input type="time" id="jamSelesaiEdukasi" value="10:15">
+
+<hr>
+
+<h3>Perwira Piket 401</h3>
+<select id="perwiraEdukasi">
+  <option value="">-- Otomatis / Bisa Diganti --</option>
+</select>
+
+<hr>
+
+<h3>Koordinator</h3>
+<textarea id="koordinatorEdukasi" placeholder="Otomatis sesuai kompi, bisa diedit"></textarea>
+
+<hr>
+
+<h3>Personil</h3>
+<textarea id="personilEdukasi" placeholder="Otomatis: Anggota Piket Grup"></textarea>
+
+<hr>
+
+<button onclick="generateLaporanEdukasi()">Generate Laporan Edukasi</button>
+
+<h3>Hasil Laporan Edukasi</h3>
+<textarea id="outputEdukasi" rows="28" readonly></textarea>
+
+</div>
+
+
 <script src="app.js"></script>
 </body>
 </html>

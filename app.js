@@ -263,10 +263,10 @@ function generateLaporan() {
 *Evakuasi ${evakuasiInput.value}*${emojiEvakuasi(evakuasiInput.value)}
 Hari/Tgl : ${getHari(tanggal.value)}, ${tanggal.value}
 
-*Kompi Jaga : ${kompi.value}
+*Kompi Jaga* : ${kompi.value}
 
-*Nama Pelapor : ${pelapor.value}
-*NO.Telp : ${hp.value}
+*Nama Pelapor* : ${pelapor.value}
+*NO.Telp* : ${hp.value}
 *Alamat*
 ${alamat.value}
 
@@ -432,3 +432,4 @@ window.addEventListener("load", () => {
     setPerwiraOtomatis();
   }
 });
+

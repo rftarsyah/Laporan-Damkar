@@ -33,45 +33,48 @@ const output = document.getElementById("output");
 const dataPetugas = {
   "Kompi A": [
     "Kusumahadi/ASN",
-    "Mulyadi Saputra/ASN",
-    "Nuriyanto, SE/ASN",
+    "Mulyadi S/ASN",
     "Arsuddin, S.Ip./ASN",
-    "Sigit Supriyanto/ASN",
-    "Yudhi Rahmat/ASN",
-    "Wiwit Sumarniyanto/ASN",
-    "Hanan Seviola Silva/CPNS",
-    "Kevin Dio Ananda/CPNS",
-    "Riffat Atharsyan/CPNS",
-    "Bambang Kusmanto/PJLP",
-    "Ibnu Susetyodo/PJLP",
-    "Ismu Saputra/PJLP",
+    "Sigit S/ASN",
+    "Yudhi R/ASN",
+    "Wiwit S/ASN",
+    "Hanan S.S/CPNS",
+    "Kevin D.A/CPNS",
+    "Riffat A/CPNS",
+    "Bambang K/PJLP",
+    "Ibnu S/PJLP",
+    "Ismu S/PJLP",
     "A. Ardiansyah/PJLP",
-    "Ahmad Robbi/PJLP",
-    "Yajid Muhadi/PJLP",
-    "Billy Yudistira Nugraha/PJLP",
-    "Muhammad Abduh/PJLP",
-    "M Taufik/PJLP"
+    "A. Robbi/PJLP",
+    "Yajid M/PJLP",
+    "Billy Y.N/PJLP",
+    "M. Abduh/PJLP",
+    "M Taufik/PJLP", 
+     "Raka P/PJLP",
+     "Putu W/PJLP",
+     "M Aprizal/PJLP",
+     "F. Syihab/PJLP"
   ],
 
   "Kompi B": [
-    "Didi Rosadi, S.IP./ASN",
-    "Eko Septiawan, S.H./ASN",
-    "Doni Saputro, S.E./ASN",
+    "Didi R, S.IP./ASN",
+    "Eko S, S.H./ASN",
+    "Doni S, S.E./ASN",
     "Andriansyah, S.M./ASN",
-    "Aziz Nurdin, S.H./ASN",
-    "Arip Rahman Hakim/ASN",
-    "Wahyu Nugroho/ASN",
+    "Aziz N, S.H./ASN",
+    "Arip R.H/ASN",
+    "Wahyu N/ASN",
     "Adam Suryana/CPNS",
-    "Agge Nikolaus/CPNS",
-    "Braja Mesti/CPNS",
-    "Adnan Setiawan/PJLP",
-    "Amri Ar Rachman/PJLP",
-    "Muhammad Fadli/PJLP",
-    "Mochamad Rastu Rizky/PJLP",
-    "Sigit Riyanto/PJLP",
-    "Chaerul Bahri/PJLP",
-    "Ivan Fadillah/PJLP",
-    "Mohamad Sholahudin/PJLP"
+    "Agge N/CPNS",
+    "Braja M/CPNS",
+    "Adnan S/PJLP",
+    "Amri A.R/PJLP",
+    "M. Fadli/PJLP",
+    "M. Rastu R/PJLP",
+    "Sigit R/PJLP",
+    "Chaerul B/PJLP",
+    "Ivan F/PJLP",
+    "M. Sholahudin/PJLP"
   ],
 
   "Kompi C": [
@@ -432,4 +435,5 @@ window.addEventListener("load", () => {
     setPerwiraOtomatis();
   }
 });
+
 
